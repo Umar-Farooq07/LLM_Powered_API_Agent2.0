@@ -1,6 +1,8 @@
 import json
 import os
+
 from app.core.config import DOCUMENTS_STORAGE_DIR
+
 
 
 def store_metadata(metadata : dict):
@@ -38,6 +40,20 @@ def get_metadata(document_id):
     else:
         return None
 
+
+def update_status(document_id):
+
+    file_path = os.path.join(DOCUMENTS_STORAGE_DIR, "metadata.json")
+    with open(file_path, "r") as f:
+        data = json.load(f)
+
+    doc_metadata = data[document_id]
+    doc_metadata["status"] = "indexed"
+
+    with open(file_path, "w") as f:
+        json.dump(data, f, indent=4)
+
+    
 
     
     
