@@ -5,6 +5,9 @@ from app.core.config import HUGGINGFACE_API_KEY, config_repo_id, config_max_new_
 
 from app.prompts.answering import answering_prompt
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 endpoint = HuggingFaceEndpoint(
     repo_id=config_repo_id,
@@ -20,6 +23,7 @@ prompt = answering_prompt
 
 def generate_answer(question: str, context: str) -> str:
     chain = prompt | llm
+    logger.info("Sent the prompt to LLM")
 
     response = chain.invoke(
     {
@@ -27,5 +31,6 @@ def generate_answer(question: str, context: str) -> str:
         "context": context,
     }
     )
+    logger.info("got the output from llm")
 
     return response.content

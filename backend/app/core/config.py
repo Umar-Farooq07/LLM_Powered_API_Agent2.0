@@ -6,6 +6,7 @@ load_dotenv()
 DOCUMENTS_STORAGE_DIR = "storage/documents"
 VECTOR_STORAGE_DIR = "VectorStore"
 HUGGINGFACE_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
+LOG_DIR = "logs/app.log"
 
 embedding_model_name ="BAAI/bge-small-en-v1.5"
 

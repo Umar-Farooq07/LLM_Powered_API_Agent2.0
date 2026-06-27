@@ -4,6 +4,9 @@ from app.api.upload_document import router as upload_document
 from app.api.ingestion import router as ingest_document_endpoint
 from app.api.query_endpoint import router as query_enpoint
 
+from app.core.logging import configure_logging
+configure_logging()
+
 
 app = FastAPI()
 app.include_router(health_router)

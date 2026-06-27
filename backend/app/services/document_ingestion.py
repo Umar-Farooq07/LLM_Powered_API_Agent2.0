@@ -3,11 +3,17 @@ from app.services.text_chunker import create_chunks
 from app.repositories.document_repositories import get_metadata, update_status
 from app.services.store_vector import store_in_vdb
 
+import logging
+logger = logging.getLogger(__name__)
 
 def ingest_document(document_id):
+
+   logger.info("Getting metadata of %s", document_id)
    metadata = get_metadata(document_id)
    if(metadata==None):
+      logger.warning("metadata of %s doesnt exist", document_id)
       return None
+   
    text = get_text(metadata["file_path"])
    chunks = create_chunks(text)
    
